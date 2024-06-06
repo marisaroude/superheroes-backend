@@ -1,0 +1,19 @@
+version: "3.8"
+
+services:
+  mongo-database:
+    container_name: mongo_superheroes
+    image: mongo:latest
+    ports:
+      - "27018:27017"
+
+  web-api-superheroes:
+    container_name: mongo_web_superheroes
+    build: .
+    ports:
+      - "3001:3001"
+    volumes:
+      - .:/api
+    command: sh -c "cd /api && npm install && npm start"
+    depends_on:
+      - mongo-database
