@@ -10,6 +10,16 @@ const getAllHeroesCtrl = async () => {
   }
 };
 
+const getHeroByIdCtrl = async (id) => {
+  try {
+    const heroes = await Hero.findById(id);
+    return heroes;
+  } catch (error) {
+    throw new Error({ message : 'Error retrieving hero data:' + error.message});
+    ;
+  }
+}
+
 const getAllHeroesMarvelCtrl = async () => {
   try {
     const heroes = await Hero.find({ house: 'Marvel' });
@@ -139,4 +149,5 @@ module.exports = {
   createHeroCtrl,
   updateHeroCtrl,
   deleteHeroCtrl,
+  getHeroByIdCtrl,
 }

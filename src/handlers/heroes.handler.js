@@ -1,4 +1,4 @@
-const { getAllHeroesCtrl, createHeroCtrl, updateHeroCtrl, deleteHeroCtrl, createAllHeroesCtrl, getAllHeroesMarvelCtrl, getAllHeroesDCCtrl } = require('../controllers/heroes.controller');
+const { getAllHeroesCtrl, createHeroCtrl, updateHeroCtrl, deleteHeroCtrl, createAllHeroesCtrl, getAllHeroesMarvelCtrl, getAllHeroesDCCtrl, getHeroByIdCtrl } = require('../controllers/heroes.controller');
 
 const getAllHeroes = async (req, res) => {
     try {
@@ -9,6 +9,15 @@ const getAllHeroes = async (req, res) => {
     }
 };
 
+const getHeroById = async (req,res) => {
+    try {
+        const { id } = req.params
+        const hero = await getHeroByIdCtrl(id);
+        res.json(hero);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+}
 const getAllHeroesMarvel = async (req, res) => {
     try {
         const heroes = await getAllHeroesMarvelCtrl();
@@ -75,4 +84,5 @@ module.exports = {
     createHero,
     updateHero,
     deleteHero,
+    getHeroById
 }

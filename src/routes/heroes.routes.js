@@ -1,5 +1,5 @@
 const express = require('express');
-const { getAllHeroes, createHero, updateHero, deleteHero, getAllHeroesMarvel, getAllHeroesDC } = require('../handlers/heroes.handler');
+const { getAllHeroes, createHero, updateHero, deleteHero, getAllHeroesMarvel, getAllHeroesDC, getHeroById } = require('../handlers/heroes.handler');
 const router = express.Router();
 
 /**
@@ -16,6 +16,29 @@ const router = express.Router();
  *         description: Error del servidor
  */
 router.get('/', getAllHeroes);
+
+/**
+ * @swagger
+ * /superheroes/heroes/{id}:
+ *   get:
+ *     tags: [Superheroes]
+ *     summary: Obtiene todos los heroes
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: ID del superheroe
+ *     description: Obtener datos de un superheroe específico
+ *     responses:
+ *       200:
+ *         description: Lista de heroes obtenida exitosamente
+ *       500:
+ *         description: Error del servidor
+ */
+router.get('/:id', getHeroById);
+
 
 /**
  * @swagger
